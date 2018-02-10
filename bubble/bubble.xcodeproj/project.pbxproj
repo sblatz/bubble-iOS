@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		14175941CBD3A2CA8CFF233B /* Pods_bubble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75072140A2121EB551406AAB /* Pods_bubble.framework */; };
+		240BBE95202F9CC800DD1524 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 240BBE93202F9CC800DD1524 /* Map.storyboard */; };
 		24E9978F202232DE009EF2FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E9978E202232DE009EF2FF /* AppDelegate.swift */; };
 		24E99791202232DE009EF2FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E99790202232DE009EF2FF /* ViewController.swift */; };
 		24E99794202232DE009EF2FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24E99792202232DE009EF2FF /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		16D35B7316F5B6DF366CB8AD /* Pods-bubble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bubble.release.xcconfig"; path = "Pods/Target Support Files/Pods-bubble/Pods-bubble.release.xcconfig"; sourceTree = "<group>"; };
+		240BBE94202F9CC800DD1524 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Map.storyboard; sourceTree = "<group>"; };
 		24E9978B202232DE009EF2FF /* bubble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bubble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24E9978E202232DE009EF2FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24E99790202232DE009EF2FF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			children = (
 				24E99797202232DE009EF2FF /* LaunchScreen.storyboard */,
 				24E99792202232DE009EF2FF /* Main.storyboard */,
+				240BBE93202F9CC800DD1524 /* Map.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				24E99799202232DE009EF2FF /* LaunchScreen.storyboard in Resources */,
 				24E99796202232DE009EF2FF /* Assets.xcassets in Resources */,
 				24E99794202232DE009EF2FF /* Main.storyboard in Resources */,
+				240BBE95202F9CC800DD1524 /* Map.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +584,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		240BBE93202F9CC800DD1524 /* Map.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				240BBE94202F9CC800DD1524 /* Base */,
+			);
+			name = Map.storyboard;
+			sourceTree = "<group>";
+		};
 		24E99792202232DE009EF2FF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -712,7 +724,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3GKN44XQ72;
+				DEVELOPMENT_TEAM = Q72GMFLLR4;
 				INFOPLIST_FILE = bubble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cs408.bubble;
@@ -728,7 +740,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3GKN44XQ72;
+				DEVELOPMENT_TEAM = Q72GMFLLR4;
 				INFOPLIST_FILE = bubble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cs408.bubble;
