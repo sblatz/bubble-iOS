@@ -17,7 +17,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupMap()
 
+        // Retrieve posts around me with backend function!
+
+    }
+
+    // Sets up the map view and grabs the current location of the user
+    func setupMap() {
         mapView.delegate = self
         mapView.showsUserLocation = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -31,16 +38,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             locationManager.requestWhenInUseAuthorization()
 
             switch CLLocationManager.authorizationStatus() {
-                case .notDetermined, .restricted, .denied:
-                    let alert = UIAlertController(title: "Enable Location Services", message: "Without location services, bubble cannot function, as it is a location-based network. Please enable location services for bubble under: Settings>Privacy>Location Serivces>bubble", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: {})
+            case .notDetermined, .restricted, .denied:
+                let alert = UIAlertController(title: "Enable Location Services", message: "Without location services, bubble cannot function, as it is a location-based network. Please enable location services for bubble under: Settings>Privacy>Location Serivces>bubble", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: {})
 
-                case .authorizedAlways, .authorizedWhenInUse:
-                    locationManager.startUpdatingLocation()
-                    let userLocation = locationManager.location!.coordinate
-                    let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation, 1000, 1000)
-                    mapView.setRegion(viewRegion, animated: false)
+            case .authorizedAlways, .authorizedWhenInUse:
+                locationManager.startUpdatingLocation()
+                let userLocation = locationManager.location!.coordinate
+                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation, 1000, 1000)
+                mapView.setRegion(viewRegion, animated: false)
             }
         }
     }
