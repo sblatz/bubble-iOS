@@ -23,14 +23,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     }
 
-    // Sets up the map view and grabs the current location of the user
+    // Set up the map view and grab the current location of the user
     func setupMap() {
         mapView.delegate = self
         mapView.showsUserLocation = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
 
-        //Check for Location Services
+        // Check for Location Services
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager = CLLocationManager()
             locationManager.delegate = self
@@ -51,20 +51,4 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
