@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import GoogleSignIn
 
-class AccountAuthViewController: UIViewController {
+class AccountAuthViewController: UIViewController, GIDSignInUIDelegate {
 
     
     // view objects
@@ -45,14 +45,14 @@ class AccountAuthViewController: UIViewController {
     @IBAction func logInClickFrmL(_ sender: Any) {
         print("logInClickFrmWlc")
         guard let username = usernameFrmTxtL.text, !username.isEmpty else {
-            let alert = UIAlertController(title: "Warining", message: "Please Enter Username", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Warning", message: "Please enter username", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
         }
         guard let userPass = userPassFrmTxtL.text, !userPass.isEmpty else {
             
-            let alert = UIAlertController(title: "Warining", message: "Please Enter Password", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Warning", message: "Please enter password", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
@@ -68,19 +68,19 @@ class AccountAuthViewController: UIViewController {
     
     @IBAction func continueClickJU(_ sender: Any) {
         guard let usernameFrmJU = usernameTxtFrmJU.text, !usernameFrmJU.isEmpty else {
-            let alert = UIAlertController(title: "Warining", message: "Please Enter Username", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Warning", message: "Please enter username", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
         }
         guard let userPassFrmJU = userPassTxtFrmJU.text, !userPassFrmJU.isEmpty else {
-            let alert = UIAlertController(title: "Warining", message: "Please Enter Password", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Warning", message: "Please enter password", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
         }
         guard let cuserPassFrmJU = cUserPassTxtFromJU.text, !cuserPassFrmJU.isEmpty else {
-            let alert = UIAlertController(title: "Warining", message: "Please Confirm Password", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Warning", message: "Please confirm password", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
@@ -93,6 +93,9 @@ class AccountAuthViewController: UIViewController {
             }else{
                 if let the_error = error?.localizedDescription{
                     print(the_error)
+                    let alert = UIAlertController(title: "Try Again", message: the_error, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }else{
                     print("Error")
                 }
@@ -115,10 +118,24 @@ class AccountAuthViewController: UIViewController {
         }
     }
     
+    /*@IBAction func googleButtonClick(_ sender: Any) {
+        AuthService.instance.googleAuth(forVC: self)
+    }
+    
+    func onGoogleInSuccessful(signedIn: Bool){
+        if signedIn{
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "segueOnSuccessfulLogin", sender: self)
+            }
+        }
+    }*/
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("hello")
         // Do any additional setup after loading the view.
+        
+        //AuthService.instance.googleSignInDelegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -137,21 +154,13 @@ class AccountAuthViewController: UIViewController {
             }else{
                 if let the_error = error?.localizedDescription{
                     print(the_error)
+                    let alert = UIAlertController(title: "Try Again", message: "Invalid Username or Password", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }else{
                     print("Error")
                 }
             }
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -7,20 +7,37 @@
 //
 
 import Foundation
-import FacebookCore
-import FacebookLogin
+//import FacebookCore
+//import FacebookLogin
 import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
 
-class AuthService: NSObject,GIDSignInDelegate {
-  
+class AuthService: NSObject {
+//class AuthService: NSObject,GIDSignInDelegate {
+
     // Static variable used to call AuthService functions
     static let instance = AuthService()
-    
+    //var googleSignInDelegate : GoogleSignInDelegate?
+
     
     // TODO: functions for signing in with email, facebook, google.
     //       Function for signing out
+    
+    
+   /* private override init() {
+        super.init()
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
+    }
+    
+    @available(iOS 9.0, *)
+    func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
+        -> Bool {
+            return GIDSignIn.sharedInstance().handle(url,
+                                                     sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                     annotation: [:])
+    }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error != nil {
@@ -56,5 +73,5 @@ class AuthService: NSObject,GIDSignInDelegate {
             return
         }
         print("move out")
-    }
+    }*/
 }
