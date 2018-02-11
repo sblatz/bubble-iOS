@@ -41,13 +41,23 @@
                                     <action selector="newBubbleButtonPressed:" destination="JQI-MO-L07" eventType="touchUpInside" id="Jc6-XR-rP7"/>
                                 </connections>
                             </button>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2F4-YC-J1l" customClass="CreateBubbleView" customModule="bubble" customModuleProvider="target">
+                                <rect key="frame" x="18.5" y="243.5" width="337.5" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="JjR-m4-p6E"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="spU-hJ-0iY" firstAttribute="centerX" secondItem="nd0-NO-BI7" secondAttribute="centerX" id="06c-Vi-SM0"/>
                             <constraint firstItem="1Xn-k8-5NC" firstAttribute="centerX" secondItem="nd0-NO-BI7" secondAttribute="centerX" id="CNI-2w-xYc"/>
+                            <constraint firstItem="2F4-YC-J1l" firstAttribute="centerY" secondItem="nd0-NO-BI7" secondAttribute="centerY" id="JBY-ii-ncu"/>
                             <constraint firstItem="1Xn-k8-5NC" firstAttribute="bottom" secondItem="nd0-NO-BI7" secondAttribute="bottom" constant="-20" id="M4Y-6U-6wU"/>
+                            <constraint firstItem="2F4-YC-J1l" firstAttribute="width" secondItem="s1S-6Z-jkt" secondAttribute="width" multiplier="0.9" id="OYT-fs-neM"/>
                             <constraint firstAttribute="bottom" secondItem="spU-hJ-0iY" secondAttribute="bottom" id="WNb-g6-eh8"/>
+                            <constraint firstItem="2F4-YC-J1l" firstAttribute="centerX" secondItem="nd0-NO-BI7" secondAttribute="centerX" id="XFk-IT-mjq"/>
                             <constraint firstItem="spU-hJ-0iY" firstAttribute="top" secondItem="s1S-6Z-jkt" secondAttribute="top" id="Yka-iA-726"/>
                             <constraint firstItem="1Xn-k8-5NC" firstAttribute="width" secondItem="spU-hJ-0iY" secondAttribute="width" multiplier="0.6" id="pcr-ml-QKv"/>
                             <constraint firstItem="spU-hJ-0iY" firstAttribute="width" secondItem="s1S-6Z-jkt" secondAttribute="width" id="zP9-lk-85r"/>
@@ -55,6 +65,7 @@
                         <viewLayoutGuide key="safeArea" id="nd0-NO-BI7"/>
                     </view>
                     <connections>
+                        <outlet property="createBubbleView" destination="2F4-YC-J1l" id="LJV-zM-foD"/>
                         <outlet property="mapView" destination="spU-hJ-0iY" id="eHe-hk-yZc"/>
                     </connections>
                 </viewController>

@@ -13,6 +13,8 @@ import CoreLocation
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var createBubbleView: CreateBubbleView!
+
     var locationManager = CLLocationManager()
 
     override func viewDidLoad() {
@@ -54,6 +56,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBAction func newBubbleButtonPressed(_ sender: Any) {
         // TODO: present this with a better animation like coming up from the bottom of the screen
         UIView.animate(withDuration: 1.0) {
+            self.createBubbleView.alpha = 1.0
             // Change alpha level of bubble posting view
         }
     }
