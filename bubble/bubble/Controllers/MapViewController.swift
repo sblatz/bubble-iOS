@@ -20,7 +20,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         setupMap()
 
         // Retrieve posts around me with backend function!
-
     }
 
     // Set up the map view and grab the current location of the user
@@ -49,6 +48,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation, 1000, 1000)
                 mapView.setRegion(viewRegion, animated: false)
             }
+        }
+    }
+
+    @IBAction func newBubbleButtonPressed(_ sender: Any) {
+        // TODO: present this with a better animation like coming up from the bottom of the screen
+        UIView.animate(withDuration: 1.0) {
+            // Change alpha level of bubble posting view
         }
     }
 }
