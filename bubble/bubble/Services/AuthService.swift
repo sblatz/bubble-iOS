@@ -13,19 +13,20 @@ import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
 
-class AuthService: NSObject {
-//class AuthService: NSObject, GIDSignInDelegate, GoogleSignInDelegate {
+//class AuthService: NSObject {
+class AuthService: NSObject, GIDSignInDelegate{
 
     // Static variable used to call AuthService functions
     static let instance = AuthService()
     //var googleSignInDelegate : GoogleSignInDelegate?
 
+    //var googleSignInDelegate : GoogleSignInDelegate?
     
     // TODO: functions for signing in with email, facebook, google.
     //       Function for signing out
     
     
-   /* private override init() {
+   private override init() {
         super.init()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
@@ -81,5 +82,4 @@ class AuthService: NSObject {
      self.performSegue(withIdentifier: "segueOnSuccessfulLogin", sender: self)
      }*/
  }
-     */
 }
