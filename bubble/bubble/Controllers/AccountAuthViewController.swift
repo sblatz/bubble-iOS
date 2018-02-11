@@ -26,6 +26,8 @@ class AccountAuthViewController: UIViewController, GIDSignInUIDelegate {
     @IBOutlet weak var cancelBtnFrmL: UIButton!
     @IBOutlet weak var joinUsBtn: UIButton!
     
+    @IBOutlet weak var googleBtn: UIButton!
+    @IBOutlet weak var fbBtn: UIButton!
     
     
     
@@ -118,24 +120,18 @@ class AccountAuthViewController: UIViewController, GIDSignInUIDelegate {
         }
     }
     
-    /*@IBAction func googleButtonClick(_ sender: Any) {
-        AuthService.instance.googleAuth(forVC: self)
+   /*@IBAction func googleButtonClick(_ sender: Any) {
+        //AuthService.instance.googleAuth(forVC: self)
     }
     
-    func onGoogleInSuccessful(signedIn: Bool){
-        if signedIn{
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "segueOnSuccessfulLogin", sender: self)
-            }
-        }
-    }*/
+*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("hello")
+
         // Do any additional setup after loading the view.
-        
-        //AuthService.instance.googleSignInDelegate = self
+        /*GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signIn()*/       
     }
 
     override func didReceiveMemoryWarning() {
