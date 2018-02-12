@@ -7,14 +7,17 @@
 //
 
 import Foundation
+
 //import FacebookCore
 //import FacebookLogin
 import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
 
+
 //class AuthService: NSObject {
 class AuthService: NSObject, GIDSignInDelegate{
+
 
     // Static variable used to call AuthService functions
     static let instance = AuthService()
