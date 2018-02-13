@@ -14,6 +14,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var createBubbleView: CreateBubbleView!
+    @IBOutlet weak var createBubbleViewCenterY: NSLayoutConstraint!
 
     var locationManager = CLLocationManager()
 
@@ -25,7 +26,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
 
     func setupBubbleView() {
-        createBubbleView.postButton.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControlEvents#>)
+        createBubbleView.postButton.addTarget(self, action: #selector(postBubble), for: .touchUpInside)
+        createBubbleView.cancelButton.addTarget(self, action: #selector(cancelPost), for: .touchUpInside)
     }
 
     // Set up the map view and grab the current location of the user
@@ -58,22 +60,26 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
 
     @IBAction func newBubbleButtonPressed(_ sender: Any) {
-        // TODO: present this with a better animation like coming up from the bottom of the screen
-        UIView.animate(withDuration: 1.0) {
-            self.createBubbleView.alpha = 1.0
+        createBubbleView.textView.text = ""
+        self.createBubbleViewCenterY.constant = 0
+
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+            self.createBubbleView.alpha = 1
+            self.view.layoutIfNeeded()
+        }) { (finished) in
+            self.createBubbleView.textView.becomeFirstResponder()
+
         }
     }
 
     // MARK - Bubble Posting
 
-    func postBubble() {
+    @objc func postBubble() {
         var bubbleData = [String: Any]()
-
-        bubbleData["text"] = createBubbleView.textView.text
-        bubbleData["user"] = "currentUser" // TODO: Use firebase to get FIRUser
-
         var latitude = 0.0
         var longitude = 0.0
+        bubbleData["text"] = createBubbleView.textView.text
+        bubbleData["user"] = "currentUser" // TODO: Use firebase to get FIRUser
 
         if let latitudeCoordinate = locationManager.location?.coordinate.latitude {
             latitude = Double(latitudeCoordinate)
@@ -99,11 +105,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
 
-    func cancelPost() {
-        createBubbleView.textView.text = ""
-        UIView.animate(withDuration: 1.0) {
-            self.createBubbleView.alpha = 1.0
-        }
-    }
+    @objc func cancelPost() {
+        self.createBubbleViewCenterY.constant = view.frame.height / 2 + createBubbleView.frame.height
+        self.createBubbleView.resignFirstResponder()
+        self.createBubbleView.endEditing(true)
 
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.createBubbleView.alpha = 0
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
 }

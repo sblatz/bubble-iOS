@@ -66,6 +66,7 @@
                     </view>
                     <connections>
                         <outlet property="createBubbleView" destination="2F4-YC-J1l" id="LJV-zM-foD"/>
+                        <outlet property="createBubbleViewCenterY" destination="JBY-ii-ncu" id="saY-6R-Di8"/>
                         <outlet property="mapView" destination="spU-hJ-0iY" id="eHe-hk-yZc"/>
                     </connections>
                 </viewController>
