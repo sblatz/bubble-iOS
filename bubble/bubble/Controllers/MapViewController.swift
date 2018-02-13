@@ -26,6 +26,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
 
     func setupBubbleView() {
+        self.createBubbleViewCenterY.constant = view.frame.height / 2 + createBubbleView.frame.height
         createBubbleView.postButton.addTarget(self, action: #selector(postBubble), for: .touchUpInside)
         createBubbleView.cancelButton.addTarget(self, action: #selector(cancelPost), for: .touchUpInside)
     }
@@ -61,7 +62,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     @IBAction func newBubbleButtonPressed(_ sender: Any) {
         createBubbleView.textView.text = ""
-        self.createBubbleViewCenterY.constant = 0
+        self.createBubbleViewCenterY.constant = -100
 
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.createBubbleView.alpha = 1
