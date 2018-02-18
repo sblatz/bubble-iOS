@@ -16,7 +16,10 @@ import GoogleSignIn
 class AuthService {
     // Static variable used to call AuthService functions
     static let instance = AuthService()
-    
+
+    func register() {
+
+    }
     
     // TODO: functions for signing in with email, facebook, google.
     //       Function for signing out
