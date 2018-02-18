@@ -7,18 +7,24 @@
 //
 
 import UIKit
-
+//import FacebookLogin
+import Firebase
 class SucessViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+       /* if AccessToken.current != nil {
+            // User is logged in, use 'accessToken' here.
+            //loginButton = LoginButton(readPermissions: [ .publicProfile, .Email, .UserFriends ])
+            
+        }*/
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
     }
     
 
@@ -31,5 +37,15 @@ class SucessViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    @IBAction func LogOutClick(_ sender: Any) {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            print("am out mann")
+            self.performSegue(withIdentifier: "segueOnSuccessfulLogOut", sender: self)
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
 }
+

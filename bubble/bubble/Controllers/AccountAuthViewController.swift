@@ -119,13 +119,6 @@ class AccountAuthViewController: UIViewController, GIDSignInUIDelegate {
             print ("Error signing out: %@", signOutError)
         }
     }
-    
-   /*@IBAction func googleButtonClick(_ sender: Any) {
-        //AuthService.instance.googleAuth(forVC: self)
-    }
-    
-*/
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
