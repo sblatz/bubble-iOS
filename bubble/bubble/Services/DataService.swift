@@ -38,7 +38,6 @@ class DataService {
         // add user to database
         // Add a new document with a generated ID
       var ref: DocumentReference? = nil
-        //ref = userCollection.addDocument(data: userData) { err in
        ref = userCollection.addDocument(data: userData) { err in
             if let err = err {
                 print("Error adding document: \(err)")
