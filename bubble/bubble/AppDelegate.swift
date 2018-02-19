@@ -11,7 +11,7 @@ import Firebase
 import GoogleSignIn
 import FBSDKCoreKit
 import FacebookCore
-import ParseFacebookUtilsV4
+
 
 
 @UIApplicationMain
