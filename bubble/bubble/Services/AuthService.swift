@@ -36,10 +36,10 @@ class AuthService {
             } else if user != nil {
                 success(true)
             }
-        }
+        } 
     }
     
-}
+
 /*class AuthService : NSObject, GIDSignInDelegate{
     //class AuthService {
     static var sharedInstance = AuthService()
@@ -132,5 +132,5 @@ class AuthService {
             print("move out")
          }
   
-
-}*/
+*/
+}
