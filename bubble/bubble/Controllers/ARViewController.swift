@@ -10,6 +10,7 @@ import UIKit
 import ARKit
 import ARCL
 import CoreLocation
+import Firebase
 
 class ARViewController: UIViewController {
 
@@ -119,7 +120,7 @@ class ARViewController: UIViewController {
         let alteredLongitude = longitude + 0.00010
         let alteredCoordinate = CLLocationCoordinate2D(latitude: alteredLatitude, longitude: alteredLongitude)
 
-        let location = CLLocation(coordinate: alteredCoordinate, altitude: (locationManager.location?.altitude)! + 50)
+        let location = CLLocation(coordinate: alteredCoordinate, altitude: (locationManager.location?.altitude)! + 25)
         let image = #imageLiteral(resourceName: "bubbleImage")
         let imageWithText = addTextToImage(text: createBubbleView.textView.text! as NSString, inImage: image, atPoint: CGPoint(x: 0, y: 0))
         let annotationNode = LocationAnnotationNode(location: location, image: imageWithText)
@@ -130,28 +131,15 @@ class ARViewController: UIViewController {
         // Dismiss the Post View
         cancelPost()
 
-        /* Need FIRUser for this to work, will be uncommented after PR:
         var bubbleData = [String: Any]()
-        var latitude = 0.0
-        var longitude = 0.0
+        let doubleLatitude = Double(latitude)
+        let doubleLongitude = Double(longitude)
         bubbleData["text"] = createBubbleView.textView.text
-        bubbleData["user"] = "currentUser" // TODO: Use firebase to get FIRUser
-
-
-
-        if let latitudeCoordinate = locationManager.location?.coordinate.latitude {
-            latitude = Double(latitudeCoordinate)
-        }
-
-        if let longitudeCoordinate = locationManager.location?.coordinate.longitude {
-            longitude = Double(longitudeCoordinate)
-        }
+        bubbleData["owner"] = Auth.auth().currentUser?.uid // TODO: Use firebase to get FIRUser
 
         if createBubbleView.textView.text != "" {
-            DataService.instance.createBubble(bubbleData: bubbleData, latitude: latitude, longitude: longitude, success: { (bubble) in
+            DataService.instance.createBubble(bubbleData: bubbleData, latitude: doubleLatitude, longitude: doubleLongitude, success: { (bubble) in
                 print(bubble)
-
-
             }, failure: { (error) in
                 print(error)
                 let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.alert)
@@ -163,7 +151,6 @@ class ARViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             self.present(alert, animated: true, completion: {})
         }
-         */
     }
 
     @objc func cancelPost() {
