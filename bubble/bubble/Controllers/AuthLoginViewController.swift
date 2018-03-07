@@ -24,11 +24,19 @@ class AuthLoginViewController: UIViewController, GIDSignInUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+        self.view.addGestureRecognizer(tapGesture)
+
        //*********** AuthService.sharedInstance.googleSignInDelegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         // Do any additional setup after loading the view.
     }
-    
+
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        emailField.resignFirstResponder()
+        passwordField.resignFirstResponder()
+    }
+
     @IBAction func onLoginBtn(_ sender: Any) {
 
         guard let email = emailField.text, !email.isEmpty else {

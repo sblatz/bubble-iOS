@@ -1,4 +1,5 @@
 PODS:
+  - ARCL (1.0.2)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -101,6 +102,7 @@ PODS:
   - Protobuf (3.5.0)
 
 DEPENDENCIES:
+  - ARCL
   - FacebookCore
   - FacebookLogin
   - Firebase/Auth
@@ -109,6 +111,7 @@ DEPENDENCIES:
   - GoogleSignIn
 
 SPEC CHECKSUMS:
+  ARCL: 88300cadfbdd6a9288ca17ad18d3ac972d6cb1e6
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   BoringSSL: 84318770d120503ab1a6aaf1df777c5ca053697e
   FacebookCore: 3ffa190a3f1f96cec0e44d3fc221bc322c595ffa
@@ -133,6 +136,6 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
 
-PODFILE CHECKSUM: 9ee66fe535b330c4b3ea29347115c83f5737e21e
+PODFILE CHECKSUM: fef355732f53b7831317f996ec299ebd5bcba38b
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.3.1

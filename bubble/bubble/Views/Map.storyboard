@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -48,14 +49,24 @@
                                     <constraint firstAttribute="height" constant="200" id="JjR-m4-p6E"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQL-5C-cIO">
+                                <rect key="frame" x="20" y="40" width="30" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="AR"/>
+                                <connections>
+                                    <segue destination="gtG-K7-rTu" kind="show" id="tzO-25-r5j"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="spU-hJ-0iY" firstAttribute="centerX" secondItem="nd0-NO-BI7" secondAttribute="centerX" id="06c-Vi-SM0"/>
                             <constraint firstItem="1Xn-k8-5NC" firstAttribute="centerX" secondItem="nd0-NO-BI7" secondAttribute="centerX" id="CNI-2w-xYc"/>
+                            <constraint firstItem="bQL-5C-cIO" firstAttribute="leading" secondItem="spU-hJ-0iY" secondAttribute="leading" constant="20" id="H4d-yW-Fbb"/>
                             <constraint firstItem="2F4-YC-J1l" firstAttribute="centerY" secondItem="nd0-NO-BI7" secondAttribute="centerY" constant="-100" id="JBY-ii-ncu"/>
                             <constraint firstItem="1Xn-k8-5NC" firstAttribute="bottom" secondItem="nd0-NO-BI7" secondAttribute="bottom" constant="-20" id="M4Y-6U-6wU"/>
                             <constraint firstItem="2F4-YC-J1l" firstAttribute="width" secondItem="s1S-6Z-jkt" secondAttribute="width" multiplier="0.9" id="OYT-fs-neM"/>
+                            <constraint firstAttribute="topMargin" secondItem="bQL-5C-cIO" secondAttribute="top" constant="-20" id="Olt-9C-aGH"/>
                             <constraint firstAttribute="bottom" secondItem="spU-hJ-0iY" secondAttribute="bottom" id="WNb-g6-eh8"/>
                             <constraint firstItem="2F4-YC-J1l" firstAttribute="centerX" secondItem="nd0-NO-BI7" secondAttribute="centerX" id="XFk-IT-mjq"/>
                             <constraint firstItem="spU-hJ-0iY" firstAttribute="top" secondItem="s1S-6Z-jkt" secondAttribute="top" id="Yka-iA-726"/>
@@ -73,6 +84,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iej-LZ-QVb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="694" y="-330"/>
+        </scene>
+        <!--AR-->
+        <scene sceneID="p21-XW-ZFE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AR" id="gtG-K7-rTu" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cqg-uT-UuW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1417" y="-331"/>
         </scene>
     </scenes>
 </document>
