@@ -108,14 +108,35 @@ class ARViewController: UIViewController {
 
     @objc func postBubble() {
 
+        guard let latitude = locationManager.location?.coordinate.latitude else {
+            return
+        }
+
+        guard let longitude = locationManager.location?.coordinate.longitude else {
+            return
+        }
         // Create a visual bubble
-        let location = CLLocation(coordinate: (locationManager.location?.coordinate)!, altitude: (locationManager.location?.altitude)!)
+        let alteredLatitude = latitude + 0.00010
+        let alteredLongitude = longitude + 0.00010
+        let alteredCoordinate = CLLocationCoordinate2D(latitude: alteredLatitude, longitude: alteredLongitude)
+
+        let location = CLLocation(coordinate: alteredCoordinate, altitude: (locationManager.location?.altitude)! + 50)
         let image = #imageLiteral(resourceName: "bubbleImage")
         let imageWithText = addTextToImage(text: createBubbleView.textView.text! as NSString, inImage: image, atPoint: CGPoint(x: 0, y: 0))
         let annotationNode = LocationAnnotationNode(location: location, image: imageWithText)
 
         annotationNode.scaleRelativeToDistance = true
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+
+        // Dismiss the Post View
+        self.createBubbleViewCenterY.constant = view.frame.height / 2 + createBubbleView.frame.height
+        self.createBubbleView.resignFirstResponder()
+        self.createBubbleView.endEditing(true)
+
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.createBubbleView.alpha = 0
+            self.view.layoutIfNeeded()
+        }, completion: nil)
 
         /*
         var bubbleData = [String: Any]()
