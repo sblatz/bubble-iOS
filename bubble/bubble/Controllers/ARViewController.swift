@@ -31,7 +31,6 @@ class ARViewController: UIViewController {
         sceneLocationView.run()
         view.insertSubview(sceneLocationView, belowSubview: newBubbleButton)
 
-
     }
     
     @IBAction func newBubbleButtonPressed(_ sender: Any) {
@@ -129,16 +128,9 @@ class ARViewController: UIViewController {
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
 
         // Dismiss the Post View
-        self.createBubbleViewCenterY.constant = view.frame.height / 2 + createBubbleView.frame.height
-        self.createBubbleView.resignFirstResponder()
-        self.createBubbleView.endEditing(true)
+        cancelPost()
 
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-            self.createBubbleView.alpha = 0
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-
-        /*
+        /* Need FIRUser for this to work, will be uncommented after PR:
         var bubbleData = [String: Any]()
         var latitude = 0.0
         var longitude = 0.0
