@@ -13,34 +13,37 @@ import CoreLocation
 
 class ARViewController: UIViewController {
 
+    @IBOutlet weak var createBubbleView: CreateBubbleView!
+    @IBOutlet weak var newBubbleButton: UIButton!
+    @IBOutlet weak var createBubbleViewCenterY: NSLayoutConstraint!
+
     var sceneLocationView = SceneLocationView()
     let locationManager = CLLocationManager()
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Set up the Create Bubble View
+        self.createBubbleViewCenterY.constant = view.frame.height / 2 + createBubbleView.frame.height
+        createBubbleView.postButton.addTarget(self, action: #selector(postBubble), for: .touchUpInside)
+        createBubbleView.cancelButton.addTarget(self, action: #selector(cancelPost), for: .touchUpInside)
+
+        // Set up the AR View
         sceneLocationView.run()
-        view.addSubview(sceneLocationView)
-
-        //40.4275449
-        //-86.9201803
-        // Do any additional setup after loading the view.
-        let coordinate = CLLocationCoordinate2D(latitude:
-            40.437468723085639, longitude: -86.921144306239967)
-        let location = CLLocation(coordinate: coordinate, altitude: 100)
-        var image = #imageLiteral(resourceName: "bubbleImage")
-        image = resizeImage(image: image, newWidth: 500)
+        view.insertSubview(sceneLocationView, belowSubview: newBubbleButton)
 
 
-        let imageWithText = addTextToImage(text: "Hello Bubble!", inImage: image, atPoint: CGPoint(x: 0, y: 0))
-        //40.4254867
-        //-86.921532099999993
+    }
+    
+    @IBAction func newBubbleButtonPressed(_ sender: Any) {
+        createBubbleView.textView.text = ""
+        self.createBubbleViewCenterY.constant = -100
 
-        print(locationManager.location?.coordinate)
-        let annotationNode = LocationAnnotationNode(location: location, image: imageWithText)
-
-       // annotationNode.scaleRelativeToDistance = true
-
-        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+            self.createBubbleView.alpha = 1
+            self.view.layoutIfNeeded()
+        }) { (finished) in
+            self.createBubbleView.textView.becomeFirstResponder()
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -53,11 +56,12 @@ class ARViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK - Image Processing
     func addTextToImage(text: NSString, inImage: UIImage, atPoint:CGPoint) -> UIImage{
 
         // Setup the font specific variables
         let textColor = UIColor.white
-        let textFont = UIFont.systemFont(ofSize: 17)
+        let textFont = UIFont.systemFont(ofSize: 80)
 
         //Setups up the font attributes that will be later used to dictate how the text should be drawn
         let textFontAttributes = [
@@ -98,6 +102,66 @@ class ARViewController: UIViewController {
         UIGraphicsEndImageContext()
 
         return newImage!
+    }
+
+    // MARK - Bubble Posting
+
+    @objc func postBubble() {
+
+        // Create a visual bubble
+        let location = CLLocation(coordinate: (locationManager.location?.coordinate)!, altitude: (locationManager.location?.altitude)!)
+        let image = #imageLiteral(resourceName: "bubbleImage")
+        let imageWithText = addTextToImage(text: createBubbleView.textView.text! as NSString, inImage: image, atPoint: CGPoint(x: 0, y: 0))
+        let annotationNode = LocationAnnotationNode(location: location, image: imageWithText)
+
+        annotationNode.scaleRelativeToDistance = true
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+
+        /*
+        var bubbleData = [String: Any]()
+        var latitude = 0.0
+        var longitude = 0.0
+        bubbleData["text"] = createBubbleView.textView.text
+        bubbleData["user"] = "currentUser" // TODO: Use firebase to get FIRUser
+
+
+
+        if let latitudeCoordinate = locationManager.location?.coordinate.latitude {
+            latitude = Double(latitudeCoordinate)
+        }
+
+        if let longitudeCoordinate = locationManager.location?.coordinate.longitude {
+            longitude = Double(longitudeCoordinate)
+        }
+
+        if createBubbleView.textView.text != "" {
+            DataService.instance.createBubble(bubbleData: bubbleData, latitude: latitude, longitude: longitude, success: { (bubble) in
+                print(bubble)
+
+
+            }, failure: { (error) in
+                print(error)
+                let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: {})
+            })
+        } else {
+            let alert = UIAlertController(title: "Cannot post empty bubble", message: "You must enter at least one character to post this bubble.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: {})
+        }
+         */
+    }
+
+    @objc func cancelPost() {
+        self.createBubbleViewCenterY.constant = view.frame.height / 2 + createBubbleView.frame.height
+        self.createBubbleView.resignFirstResponder()
+        self.createBubbleView.endEditing(true)
+
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.createBubbleView.alpha = 0
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 
     /*
