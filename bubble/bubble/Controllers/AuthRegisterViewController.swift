@@ -15,7 +15,29 @@ class AuthRegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var fullNameField: UITextField!
-    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        emailField.delegate = self
+        passwordField.delegate = self
+        confirmPasswordField.delegate = self
+        fullNameField.delegate = self
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == fullNameField {
+            emailField.becomeFirstResponder()
+        } else if textField == emailField {
+            passwordField.becomeFirstResponder()
+        } else if textField == passwordField {
+            confirmPasswordField.becomeFirstResponder()
+        } else if textField == confirmPasswordField {
+            textField.endEditing(true)
+        }
+
+        return true
+    }
     
     @IBAction func onContinue(_ sender: Any) {
         
