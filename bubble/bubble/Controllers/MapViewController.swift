@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Firebase
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
@@ -76,22 +77,26 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     // MARK - Bubble Posting
 
     @objc func postBubble() {
+
+        guard let latitude = locationManager.location?.coordinate.latitude else {
+            return
+        }
+
+        guard let longitude = locationManager.location?.coordinate.longitude else {
+            return
+        }
+
+        // Dismiss the Post View
+        cancelPost()
+
         var bubbleData = [String: Any]()
-        var latitude = 0.0
-        var longitude = 0.0
+        let doubleLatitude = Double(latitude)
+        let doubleLongitude = Double(longitude)
         bubbleData["text"] = createBubbleView.textView.text
-        bubbleData["user"] = "currentUser" // TODO: Use firebase to get FIRUser
-
-        if let latitudeCoordinate = locationManager.location?.coordinate.latitude {
-            latitude = Double(latitudeCoordinate)
-        }
-
-        if let longitudeCoordinate = locationManager.location?.coordinate.longitude {
-            longitude = Double(longitudeCoordinate)
-        }
+        bubbleData["owner"] = Auth.auth().currentUser?.uid // TODO: Use firebase to get FIRUser
 
         if createBubbleView.textView.text != "" {
-            DataService.instance.createBubble(bubbleData: bubbleData, latitude: latitude, longitude: longitude, success: { (bubble) in
+            DataService.instance.createBubble(bubbleData: bubbleData, latitude: doubleLatitude, longitude: doubleLongitude, success: { (bubble) in
                 print(bubble)
             }, failure: { (error) in
                 print(error)
