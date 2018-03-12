@@ -57,10 +57,23 @@
                                     <segue destination="gtG-K7-rTu" kind="show" id="tzO-25-r5j"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DIv-zO-D2u">
+                                <rect key="frame" x="301" y="40" width="55" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="O9k-Pf-EdQ"/>
+                                    <constraint firstAttribute="width" constant="55" id="sRd-XD-odG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Profile"/>
+                                <connections>
+                                    <segue destination="BdC-K4-x2K" kind="show" id="hqL-vh-oI5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="spU-hJ-0iY" firstAttribute="centerX" secondItem="nd0-NO-BI7" secondAttribute="centerX" id="06c-Vi-SM0"/>
+                            <constraint firstItem="DIv-zO-D2u" firstAttribute="top" secondItem="nd0-NO-BI7" secondAttribute="top" constant="20" id="8Cw-W7-mAy"/>
                             <constraint firstItem="1Xn-k8-5NC" firstAttribute="centerX" secondItem="nd0-NO-BI7" secondAttribute="centerX" id="CNI-2w-xYc"/>
                             <constraint firstItem="bQL-5C-cIO" firstAttribute="leading" secondItem="spU-hJ-0iY" secondAttribute="leading" constant="20" id="H4d-yW-Fbb"/>
                             <constraint firstItem="2F4-YC-J1l" firstAttribute="centerY" secondItem="nd0-NO-BI7" secondAttribute="centerY" constant="-100" id="JBY-ii-ncu"/>
@@ -70,6 +83,7 @@
                             <constraint firstAttribute="bottom" secondItem="spU-hJ-0iY" secondAttribute="bottom" id="WNb-g6-eh8"/>
                             <constraint firstItem="2F4-YC-J1l" firstAttribute="centerX" secondItem="nd0-NO-BI7" secondAttribute="centerX" id="XFk-IT-mjq"/>
                             <constraint firstItem="spU-hJ-0iY" firstAttribute="top" secondItem="s1S-6Z-jkt" secondAttribute="top" id="Yka-iA-726"/>
+                            <constraint firstItem="nd0-NO-BI7" firstAttribute="trailing" secondItem="DIv-zO-D2u" secondAttribute="trailing" constant="19" id="hbN-1P-kTY"/>
                             <constraint firstItem="1Xn-k8-5NC" firstAttribute="width" secondItem="spU-hJ-0iY" secondAttribute="width" multiplier="0.6" id="pcr-ml-QKv"/>
                             <constraint firstItem="spU-hJ-0iY" firstAttribute="width" secondItem="s1S-6Z-jkt" secondAttribute="width" id="zP9-lk-85r"/>
                         </constraints>
@@ -84,6 +98,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iej-LZ-QVb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="694" y="-330"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="mGn-oX-3tA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="BdC-K4-x2K" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tcx-5X-rzQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1364" y="-472"/>
         </scene>
         <!--AR-->
         <scene sceneID="p21-XW-ZFE">

@@ -21,11 +21,13 @@ class MapViewController: UIViewController {
     var bubbles = [Bubble]()
     let bubbleSemaphore = DispatchSemaphore(value: 1)
     var currentBubble: Bubble!
+    var currentUser: BubbleUser?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMap()
         setupBubbleView()
+        getCurrentUser()
         // Retrieve posts around me with backend function!
     }
 
@@ -177,4 +179,10 @@ extension MapViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         bubbleSemaphore.signal()
     }
     
+    func getCurrentUser() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        DataService.instance.getUser(userID: uid) { (user) in
+            self.currentUser = user
+        }
+    }
 }

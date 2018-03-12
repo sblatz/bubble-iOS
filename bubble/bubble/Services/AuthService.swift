@@ -22,12 +22,14 @@ class AuthService {
         let email = userData["email"] as! String
         let password = userData["password"] as! String
         userData["password"] = nil
+        userData["profilePictureURL"] = ""
         
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if let error = error {
                 user?.delete(completion: nil)
                 failure(error)
             } else if let user = user {
+                userData["uid"] = user.uid
                 DataService.instance.userCollection.document(user.uid).setData(userData, completion: { (error) in
                     if let error = error {
                         user.delete(completion: nil)
@@ -49,6 +51,32 @@ class AuthService {
                 success(true)
             }
         } 
+    }
+    
+    func signOut(success: @escaping (Bool) -> (Void)) {
+        if Auth.auth().currentUser != nil {
+            do {
+                try Auth.auth().signOut()
+            } catch let signOutError as NSError {
+                success(false)
+                print("Error signing out: %@", signOutError)
+            }
+            success(true)
+        }
+    }
+    
+    func deleteAccount(success: @escaping (Bool) -> (Void)) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        DataService.instance.deleteUser(uid: uid)
+        Auth.auth().currentUser?.delete(completion: { (error) in
+            if error != nil {
+                success(false)
+                print("Error deleting user: \(String(describing: error))")
+            } else {
+                success(true)
+            }
+        })
     }
     
 
