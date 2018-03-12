@@ -139,7 +139,6 @@ class DataService {
                 for bubble in bubbles {
                     bubbleResult.append(Bubble(bubbleData: bubble.data()))
                 }
-                
                 success(bubbleResult)
             }
         }
@@ -160,7 +159,6 @@ class DataService {
                 for bubble in bubbles {
                     bubbleResult.append(Bubble(bubbleData: bubble.data()))
                 }
-                
                 success(bubbleResult)
             }
         }
@@ -182,7 +180,7 @@ class DataService {
             }
             
             let bubbleData = bubbleDoc.data()
-            let oldVoteCount = bubbleData["voteCount"] as! Int
+            let oldVoteCount = bubbleData!["voteCount"] as! Int
             
             let newVoteCount = oldVoteCount + 1
             
@@ -213,7 +211,7 @@ class DataService {
             }
             
             let bubbleData = bubbleDoc.data()
-            let oldVoteCount = bubbleData["voteCount"] as! Int
+            let oldVoteCount = bubbleData!["voteCount"] as! Int
             
             let newVoteCount = oldVoteCount - 1
             
