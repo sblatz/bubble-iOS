@@ -74,7 +74,7 @@ class ProfileSettingsViewController: UITableViewController, UIImagePickerControl
     
     func saveUserInfo() {
         print("SAVING URL: \(profilePictureURL)")
-        var userData = ["bio": bioTextView.text, "profilePictureURL": profilePictureURL ?? "no picture"] as [String : Any]
+        var userData = ["profilePictureURL": profilePictureURL ?? "no picture"] as [String : Any]
         
         if profilePictureURL != nil {
             userData["profilePictureURL"] = profilePictureURL
@@ -88,9 +88,6 @@ class ProfileSettingsViewController: UITableViewController, UIImagePickerControl
         AuthService.sharedInstance.signOut { (success) -> (Void) in
             if success {
                 print("SUCCESS SIGN OUT")
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "SignIn", sender: self)
-                }
             } else {
                 print("SIGN OUT FAILED")
             }
@@ -122,12 +119,7 @@ class ProfileSettingsViewController: UITableViewController, UIImagePickerControl
         }
         
         if indexPath.section == 2, indexPath.row == 0 {
-            let mailComposeViewController = configureMailController()
-            if(MFMailComposeViewController.canSendMail()){
-                self.present(mailComposeViewController, animated: true, completion: nil)
-            } else{
-                showMailError()
-            }
+            
         }
     }
     
@@ -155,26 +147,6 @@ class ProfileSettingsViewController: UITableViewController, UIImagePickerControl
         profilePictureImage = selectedImage
         guard let profileImage = profilePictureImage, let imageData = UIImageJPEGRepresentation(profileImage, 0.2) else {
             return
-        }
-        
-        let imageUID = NSUUID().uuidString
-        let metaData = StorageMetadata()
-        metaData.contentType = "image/jpeg"
-        
-        DataService.instance.REF_PROFILE_PICS.child(imageUID).putData(imageData, metadata: metaData) { (metaData, error) in
-            
-            if error != nil {
-                print("IMAGE UPLOAD ERROR: Image wasn't uploaded to Firebase")
-            } else {
-                print("IMAGE UPLOAD SUCCESS: Image was uploaded to Firebase")
-                guard let imageURL = metaData?.downloadURL()?.absoluteString else {
-                    return
-                }
-                
-                self.profilePictureURL = imageURL
-                print("IMAGE URL: \(String(describing: self.profilePictureURL))")
-                
-            }
         }
         
         DispatchQueue.main.async {
