@@ -103,19 +103,8 @@ class ProfileSettingsViewController: UITableViewController, UIImagePickerControl
         
         if indexPath.section == 1, indexPath.row == 2 {
             print("DELETE ACCOUNT PRESSED")
+            self.deleteAccount()
             
-            let alert = UIAlertController(title: "Deleting Account", message: "Are you sure you want to delete your account? This cannot be undone!", preferredStyle: .alert)
-            let yes = UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
-                self.deleteAccount()
-            })
-            
-            let no = UIAlertAction(title: "No", style: .default, handler: { (action) in
-                alert.dismiss(animated: true, completion: nil)
-            })
-            
-            alert.addAction(yes)
-            alert.addAction(no)
-            self.present(alert, animated: true, completion: nil)
         }
         
         if indexPath.section == 2, indexPath.row == 0 {
