@@ -151,7 +151,6 @@ class DataService {
                 for bubble in bubbles {
                     bubbleResult.append(Bubble(bubbleData: bubble.data()))
                 }
-                
                 success(bubbleResult)
             }
         }
