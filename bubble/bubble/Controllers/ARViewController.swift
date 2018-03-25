@@ -33,7 +33,7 @@ class ARViewController: UIViewController {
         view.insertSubview(sceneLocationView, belowSubview: newBubbleButton)
 
     }
-    
+
     @IBAction func newBubbleButtonPressed(_ sender: Any) {
         createBubbleView.textView.text = ""
         self.createBubbleViewCenterY.constant = -100
