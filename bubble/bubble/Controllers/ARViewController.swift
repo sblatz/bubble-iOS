@@ -20,6 +20,7 @@ class ARViewController: UIViewController {
 
     var sceneLocationView = SceneLocationView()
     let locationManager = CLLocationManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,6 +33,36 @@ class ARViewController: UIViewController {
         sceneLocationView.run()
         view.insertSubview(sceneLocationView, belowSubview: newBubbleButton)
 
+        populatePostedBubbles()
+
+    }
+
+    func populatePostedBubbles() {
+        guard let latitude = locationManager.location?.coordinate.latitude else {
+            return
+        }
+
+        guard let longitude = locationManager.location?.coordinate.longitude else {
+            return
+        }
+
+        DataService.instance.getBubbles(latitude: latitude, longitude: longitude, success: { (bubbles) in
+            for bubble in bubbles {
+                // Create a visual element:
+
+                let coordinate = CLLocationCoordinate2D(latitude: bubble.geopoint.latitude, longitude: bubble.geopoint.longitude)
+                let location = CLLocation(coordinate: coordinate, altitude: (self.locationManager.location?.altitude)! + 10)
+                let image = #imageLiteral(resourceName: "bubbleImage")
+                let imageWithText = self.addTextToImage(text: bubble.text as NSString, inImage: image, atPoint: CGPoint(x: 0, y: 0))
+                let annotationNode = LocationAnnotationNode(location: location, image: imageWithText)
+                print("adding bubble: \(bubble.text)")
+                annotationNode.scaleRelativeToDistance = true
+                self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+
+            }
+        }) { (error) in
+            print("error fetching bubble: \(error)")
+        }
     }
 
     @IBAction func newBubbleButtonPressed(_ sender: Any) {
