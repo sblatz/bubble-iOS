@@ -109,9 +109,7 @@ class AuthService {
                             if let error = error {
                                 failure(error)
                             } else if userDoc!.exists {
-                                success(user, userInfo, true)
                             } else {
-                                success(user, userInfo, false)
                             }
                         })
                         
