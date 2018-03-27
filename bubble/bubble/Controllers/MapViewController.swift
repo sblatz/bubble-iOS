@@ -23,6 +23,11 @@ class MapViewController: UIViewController {
     var currentBubble: Bubble!
     var currentUser: BubbleUser?
 
+    var oldAnnotations = [MKAnnotation]()
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMap()
@@ -53,7 +58,9 @@ class MapViewController: UIViewController {
             locationManager = CLLocationManager()
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestAlwaysAuthorization()
+            //locationManager.requestWhenInUseAuthorization()
+
 
             switch CLLocationManager.authorizationStatus() {
             case .notDetermined, .restricted, .denied:
@@ -135,6 +142,11 @@ extension MapViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let centerCoordinate = mapView.centerCoordinate
         bubbleSemaphore.wait()
+
+        for annotation in mapView.annotations {
+            oldAnnotations.append(annotation)
+        }
+        
         DataService.instance.getBubbles(latitude: centerCoordinate.latitude, longitude: centerCoordinate.longitude, success: { (bubbles) in
             self.bubbles = bubbles
             DispatchQueue.main.async {
@@ -160,9 +172,11 @@ extension MapViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let bubbleAnnotationView = view as! MKPinAnnotationView
-        let bubbleAnnotation = bubbleAnnotationView.annotation as! BubbleAnnotation
-        currentBubble = bubbleAnnotation.bubble
+        let bubbleAnnotationView = view as? MKPinAnnotationView
+        if let bubbleAnnotation = bubbleAnnotationView?.annotation as? BubbleAnnotation {
+            currentBubble = bubbleAnnotation.bubble
+
+        }
     }
 
     //var success: Bubble!
@@ -184,13 +198,29 @@ extension MapViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     }
     
     func placeBubbles() {
+        var newAnnotations = [MKAnnotation]()
         for bubble in bubbles {
             let bubbleAnnotation = BubbleAnnotation()
             bubbleAnnotation.bubble = bubble
             bubbleAnnotation.title = bubble.text
             bubbleAnnotation.coordinate = CLLocationCoordinate2DMake(bubble.geopoint.latitude, bubble.geopoint.longitude)
             mapView.addAnnotation(bubbleAnnotation)
+            newAnnotations.append(bubbleAnnotation)
         }
+
+        for oldAnnotation in oldAnnotations {
+            var bubbleStillExists = false
+            for newAnnotation in newAnnotations {
+                if newAnnotation.coordinate.latitude == oldAnnotation.coordinate.latitude && newAnnotation.coordinate.longitude == oldAnnotation.coordinate.longitude {
+                    bubbleStillExists = true
+                }
+            }
+
+            if !bubbleStillExists {
+                mapView.removeAnnotation(oldAnnotation)
+            }
+        }
+
         
         bubbleSemaphore.signal()
     }
@@ -202,7 +232,7 @@ extension MapViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         }
     }
   
-    
+
     func getCurrentUser() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         DataService.instance.getUser(userID: uid) { (user) in

@@ -178,7 +178,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eso-LU-zTi">
-                                        <rect key="frame" x="8" y="8" width="181" height="25"/>
+                                        <rect key="frame" x="8" y="8" width="176" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="BOd-kY-dQn"/>
                                         </constraints>
@@ -206,9 +206,9 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7oB-yI-afe">
-                                        <rect key="frame" x="223" y="10" width="100" height="14.5"/>
+                                        <rect key="frame" x="218" y="10" width="105" height="14.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="HFE-Sr-A2F"/>
+                                            <constraint firstAttribute="width" constant="105" id="HFE-Sr-A2F"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
