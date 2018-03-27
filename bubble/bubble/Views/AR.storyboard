@@ -67,12 +67,48 @@
                                     <segue destination="P1b-Ye-V9q" kind="show" id="enu-TB-xcv"/>
                                 </connections>
                             </button>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XBI-Wm-gfw">
+                                <rect key="frame" x="87.5" y="243.5" width="200" height="200"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kFs-fK-1hj">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="Hw4-bU-Agc">
+                                            <rect key="frame" x="55" y="40" width="90" height="75"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="90" id="G2Y-uv-CgP"/>
+                                                <constraint firstAttribute="height" constant="75" id="tFn-ek-1aM"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bubble Posted!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xgl-In-6Lz">
+                                            <rect key="frame" x="0.0" y="135" width="200" height="27.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Hw4-bU-Agc" firstAttribute="top" secondItem="kFs-fK-1hj" secondAttribute="top" constant="40" id="RLI-P9-Qfm"/>
+                                        <constraint firstItem="Xgl-In-6Lz" firstAttribute="width" secondItem="kFs-fK-1hj" secondAttribute="width" id="aRs-oY-f4f"/>
+                                        <constraint firstItem="Hw4-bU-Agc" firstAttribute="centerX" secondItem="kFs-fK-1hj" secondAttribute="centerX" id="dO1-gN-73q"/>
+                                        <constraint firstItem="Xgl-In-6Lz" firstAttribute="centerX" secondItem="kFs-fK-1hj" secondAttribute="centerX" id="g5M-ml-Cta"/>
+                                        <constraint firstItem="Xgl-In-6Lz" firstAttribute="top" secondItem="Hw4-bU-Agc" secondAttribute="bottom" constant="20" id="jOU-us-Pgk"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="HGd-V1-5AK"/>
+                                    <constraint firstAttribute="height" constant="200" id="WuO-GX-dpv"/>
+                                </constraints>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="yG8-OB-k3d" firstAttribute="bottom" secondItem="VPF-cP-QF6" secondAttribute="bottom" constant="20" id="2LW-mI-XrQ"/>
+                            <constraint firstItem="XBI-Wm-gfw" firstAttribute="centerY" secondItem="yG8-OB-k3d" secondAttribute="centerY" id="8fe-B5-XRo"/>
                             <constraint firstItem="n1t-vD-L2H" firstAttribute="top" secondItem="yG8-OB-k3d" secondAttribute="top" constant="20" id="H3i-F0-Fcj"/>
                             <constraint firstItem="VPF-cP-QF6" firstAttribute="centerX" secondItem="yG8-OB-k3d" secondAttribute="centerX" id="IJm-Vf-e8W"/>
+                            <constraint firstItem="XBI-Wm-gfw" firstAttribute="centerX" secondItem="yG8-OB-k3d" secondAttribute="centerX" id="Ja1-VN-caw"/>
                             <constraint firstItem="GIe-Nj-dtD" firstAttribute="centerY" secondItem="yG8-OB-k3d" secondAttribute="centerY" id="LuS-8J-Ez7"/>
                             <constraint firstItem="GIe-Nj-dtD" firstAttribute="centerX" secondItem="yG8-OB-k3d" secondAttribute="centerX" id="M9y-33-wrV"/>
                             <constraint firstItem="GIe-Nj-dtD" firstAttribute="width" secondItem="TwK-hu-cWc" secondAttribute="width" multiplier="0.9" id="NsL-Ub-MF2"/>
@@ -84,12 +120,13 @@
                     <connections>
                         <outlet property="createBubbleView" destination="GIe-Nj-dtD" id="mYy-7E-VwC"/>
                         <outlet property="createBubbleViewCenterY" destination="LuS-8J-Ez7" id="8oF-JQ-gWw"/>
+                        <outlet property="effectView" destination="XBI-Wm-gfw" id="fq3-ld-Ytt"/>
                         <outlet property="newBubbleButton" destination="VPF-cP-QF6" id="pVY-pp-P1Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UL-FV-yJq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1027" y="46"/>
+            <point key="canvasLocation" x="-1028" y="45.42728635682159"/>
         </scene>
         <!--Map-->
         <scene sceneID="lrb-XW-Xl1">
@@ -100,4 +137,7 @@
             <point key="canvasLocation" x="-210" y="30"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="check" width="600" height="461"/>
+    </resources>
 </document>

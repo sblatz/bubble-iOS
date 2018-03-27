@@ -21,8 +21,11 @@ class ARViewController: UIViewController {
     var sceneLocationView = SceneLocationView()
     let locationManager = CLLocationManager()
 
+    @IBOutlet weak var effectView: UIVisualEffectView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.effectView.alpha = 0
 
         // Set up the Create Bubble View
         self.createBubbleViewCenterY.constant = view.frame.height / 2 + createBubbleView.frame.height
@@ -170,6 +173,13 @@ class ARViewController: UIViewController {
         if createBubbleView.textView.text != "" {
             DataService.instance.createBubble(bubbleData: bubbleData, latitude: doubleLatitude, longitude: doubleLongitude, success: { (bubble) in
                 print(bubble)
+
+                self.effectView.alpha = 1
+
+                UIView.animate(withDuration: 1.0, delay: 1.0, options: UIViewAnimationOptions.curveLinear, animations: {
+                    self.effectView.alpha = 0
+                }, completion: nil)
+                
             }, failure: { (error) in
                 print(error)
                 let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.alert)

@@ -27,7 +27,7 @@ UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "bubblecell", for: indexPath) as? BubbleTableViewCell  else {
-            fatalError("The dequeued cell is not an instance of MealTableViewCell.")
+            fatalError("The dequeued cell is not an instance of BubbleTableViewCell.")
         }
         let data = gBubbleResult[indexPath.row]
         // Configure the cell...

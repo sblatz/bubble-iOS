@@ -205,7 +205,7 @@ class ProfileSettingsViewController: UITableViewController, UIImagePickerControl
     func configureMailController() -> MFMailComposeViewController{
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
-        mailComposerVC.setToRecipients(["cs307idebate@gmail.com"])
+        mailComposerVC.setToRecipients(["cs408bubble@gmail.com"])
         mailComposerVC.setSubject("Feedback")
         return mailComposerVC
     }

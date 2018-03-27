@@ -16,7 +16,8 @@ class BubbleViewController: UIViewController {
     @IBOutlet weak var backgroundButton: UIButton!
     @IBOutlet weak var upVoteButton: UIButton!
     @IBOutlet weak var downVoteButton: UIButton!
-    
+    @IBOutlet weak var voteCount: UILabel!
+
     var currentBubble: Bubble!
     
     override func viewDidLoad() {
@@ -30,6 +31,8 @@ class BubbleViewController: UIViewController {
         downVoteButton.layer.masksToBounds = true
         bubbleTextField.numberOfLines = 0;
         bubbleTextField.text = currentBubble.text
+        voteCount.text = "\(currentBubble.voteCount!)"
+
         timeTextField.text = ("\(Date(timeIntervalSince1970: currentBubble.timestamp))")
         
         print("\("user.name")")
@@ -43,6 +46,7 @@ class BubbleViewController: UIViewController {
 
     @IBAction func upVote(_ sender: Any) {
         print("init  up")
+        voteCount.text = "\(currentBubble.voteCount + 1)"
         print(currentBubble.uid)
         DataService.instance.voteBubble(bubble: currentBubble, uid: currentBubble.uid, success: {(bubbleResult) in
             print("up by one")
@@ -54,6 +58,7 @@ class BubbleViewController: UIViewController {
     @IBAction func downVote(_ sender: Any) {
         print("init  down")
         print(currentBubble.uid)
+        voteCount.text = "\(currentBubble.voteCount - 1)"
         DataService.instance.unvoteBubble(bubble: currentBubble, uid: currentBubble.uid, success: {(bubbleResult) in
             print("down by one")
             print("\(bubbleResult)")
