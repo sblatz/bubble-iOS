@@ -8,13 +8,14 @@
 
 import UIKit
 
-class BubbleCell: UITableViewCell {
+class BubbleCell: UITableViewCell, UITextViewDelegate {
     @IBOutlet var bubbleText: UITextView!
     var bubble: Bubble!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        bubbleText.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,5 +28,25 @@ class BubbleCell: UITableViewCell {
         self.bubble = bubble
         bubbleText.text = bubble.text
     }
-
+    
+    func saveBubbleText() {
+        let bubbleData = ["text": bubbleText.text]
+        DataService.instance.updateBubble(bubbleID: bubble.uid, bubbleData: bubbleData)
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        
+        let count = bubbleText.text.count
+        if range.length + range.location > count {
+            return false
+        }
+        
+        let newLength = count + text.count - range.length
+        return newLength <= 140
+    }
 }

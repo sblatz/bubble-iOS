@@ -70,4 +70,11 @@ class UserBubblesViewController: UIViewController, UITableViewDelegate, UITableV
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func savePressed(_ sender: Any) {
+        guard let cells = bubblesTableView.visibleCells as? [BubbleCell] else { return }
+        
+        for cell in cells {
+            cell.saveBubbleText()
+        }
+    }
 }
