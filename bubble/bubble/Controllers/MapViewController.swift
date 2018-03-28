@@ -212,7 +212,9 @@ extension MapViewController: CLLocationManagerDelegate, MKMapViewDelegate {
             var bubbleStillExists = false
             for newAnnotation in newAnnotations {
                 if newAnnotation.coordinate.latitude == oldAnnotation.coordinate.latitude && newAnnotation.coordinate.longitude == oldAnnotation.coordinate.longitude {
-                    bubbleStillExists = true
+                    if newAnnotation.title! == oldAnnotation.title! {
+                        bubbleStillExists = true
+                    }
                 }
             }
 
