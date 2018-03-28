@@ -269,4 +269,13 @@ class DataService {
         })
     }
     
+    func updateBubble(bubbleID: String, bubbleData: [String:Any]) {
+        bubbleCollection.document(bubbleID).updateData(bubbleData) { (error) in
+            if error != nil {
+                print("BUBBLE UPDATE ERROR: \(error?.localizedDescription)")
+            } else {
+                print("BUBBLE UPDATED!")
+            }
+        }
+    }
 }
